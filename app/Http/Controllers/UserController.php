@@ -14,7 +14,7 @@ class UserController extends Controller
     		return view("client.pages.login");
     	}
 
-    // chức năng đăng nhâp    
+    // chức năng đăng nhâp sử dụng form request
     	public function postLogin(Login $request){
     		if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
     			// echo Auth::user()->name;
@@ -26,13 +26,14 @@ class UserController extends Controller
 	       
 	        
     	}
+    //end
 
     // return view singup
     	public function getSignup(){
     		return view("client.pages.signup");
     	}
 
-    // chức năng đăng ký
+    // chức năng đăng ký sử dụng form request
     	public function postSignup(Signup $request){
     		$user = new Users;
     		$user->name = $request->full_name;
@@ -43,5 +44,6 @@ class UserController extends Controller
 
     		return view("client.pages.signup");
     	}
+    //end
 
 }
