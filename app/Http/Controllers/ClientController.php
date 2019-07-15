@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Users;
 class ClientController extends Controller
 {
-    // login
+    // return view login
     	public function getLogin(){
     		return view("client.pages.login");
     	}
 
+    // chức năng đăng nhâp    
     	public function postLogin(Request $request){
     		$this->validate($request, 
     			[
@@ -32,11 +33,12 @@ class ClientController extends Controller
 	        
     	}
 
-    // singup
+    // return view singup
     	public function getSignup(){
     		return view("client.pages.signup");
     	}
 
+    // chức năng đăng ký sdzfsdf sdzdfsddfsdfds
     	public function postSignup(Request $request){
     		$this->validate($request, 
     			[
