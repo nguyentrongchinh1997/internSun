@@ -38,7 +38,7 @@ class ClientController extends Controller
     		return view("client.pages.signup");
     	}
 
-    // chức năng đăng ký sdzfsdf sdzdfsddfsdfds
+    // chức năng đăng ký
     	public function postSignup(Request $request){
     		$this->validate($request, 
     			[
