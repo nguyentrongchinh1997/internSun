@@ -17,10 +17,10 @@ Route::get('/', function () {
 // Route::get('login', function(){
 // 	return view("client.pages.login");
 // });
-Route::get("login", "ClientController@getLogin");
-Route::post("login", "ClientController@postLogin");
-Route::get("signup", "ClientController@getSignup");
-Route::post("signup", "ClientController@postSignup");
+Route::get("login", "UserController@getLogin");
+Route::post("login", "UserController@postLogin");
+Route::get("signup", "UserController@getSignup");
+Route::post("signup", "UserController@postSignup");
 
 
 Route::group(["prefix"=>"admin"], function(){
