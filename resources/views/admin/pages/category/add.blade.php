@@ -9,6 +9,13 @@
                 </h1>
             </div>
             <div class="col-lg-7">
+                @if(count($errors)>0)
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $err)
+                        {{$err}}<br>
+                    @endforeach    
+                </div>
+                @endif
                 @if(session('thongbao'))
                     <div class="alert alert-success">
                         {{session('thongbao')}}
@@ -18,7 +25,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label>Tên chuyên mục</label>
-                        <input required="required" class="form-control" type="text" name="name">
+                        <input class="form-control" type="text" name="name">
                     </div>
                     <div class="form-group">
                         <label>Loại chuyên mục</label>

@@ -9,6 +9,13 @@
                 </h1>
             </div>
             <div class="col-lg-7">
+                @if(count($errors)>0)
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $err)
+                        {{$err}}<br>
+                    @endforeach    
+                </div>
+                @endif
                 @if(session('thongbao'))
                     <div class="alert alert-success">
                         {{session('thongbao')}}
@@ -18,26 +25,26 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label>Tiêu đề</label>
-                        <input required="required" class="form-control" type="text" name="title">
+                        <input class="form-control" type="text" name="title">
                     </div>
                     <div class="form-group">
                         <label>Chuyên mục</label>
                         <select class="form-control" name="category">
-                            @foreach($list_category as $l)
+                            @foreach($listCategory as $l)
                                 <option value="{{$l->id}}">{{$l->name}}</option>
                             @endforeach
                         <select >
                     </div>
                     <div class="form-group">
                         <label>Ảnh post </label>
-                        <input type="file" class="form-group" name="file" required="required">
+                        <input type="file" class="form-group" name="file">
                     </div>
                     <div class="form-group">
                         <label>Nội dung</label>
                         <textarea name="content" id="demo" class="ckeditor"></textarea>
                     </div>
                     <div class="form-group">
-                        <button>Thêm</button>
+                        <button type="submit">Thêm</button>
                     </div>
                 </form>
                 
