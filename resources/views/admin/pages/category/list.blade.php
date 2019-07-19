@@ -20,11 +20,12 @@
                         <th>Tên chuyên mục</th>
                         <th>Tên không dấu</th>
                         <th>Loại chuyên mục</th>
+                        
                         <th>Xóa</th>
                     </tr>
                 </thead>
                 @php $stt = 0; @endphp
-                @foreach($list_category as $l)
+                @foreach($listCategory as $l)
                     <tr>
                         <td>{{++$stt}}</td>
                         <td>
@@ -45,8 +46,12 @@
                                 <span>Bài viết</span>
                             @endif
                         </td>
+                       
                         <td>
-                            <a onclick="return xoa()" href="admin/category/delete/{{$l->id}}">Xóa</a>
+                            <center>
+                                <a onclick="return xoa()" href="admin/category/delete/{{$l->id}}">Xóa</a>
+                            </center>
+                            
                         </td>
                         <script type="text/javascript">
                             function xoa(){

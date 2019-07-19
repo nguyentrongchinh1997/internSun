@@ -4,55 +4,67 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Service\CategoryService;
+
 class CategoryController extends Controller
 {
-    // category
-    public function getListCategory(){
-    	$list_category = Category::all();
-    	$data = ["list_category"=>$list_category];
-    	return view("admin.pages.category.list", $data);
+    /*hàm khởi tạo*/
+    protected $listCategory;
+    public function __construct(Category $category)
+    {
+        $this->listCategory = $category;
     }
+    /*end*/
 
-    public function getAddCategory(){
-    	return view("admin.pages.category.add");	
+    /*trả về danh sách chuyên mục*/
+    public function getListCategoryForm()
+    {
+        $data = ["listCategory"=>$this->listCategory->listAllCategory()];
+        return view("admin.pages.category.list", $data);
     }
+    /*end*/
 
-    public function postAddCategory(Request $request){
-    	$name 			= $request->name;
-    	$unsigned_name 	= changeTitle($request->name);
-    	$type 			= $request->type;
-    	$category 		= new Category;
-    	$category->name = $name;
-    	$category->unsigned_name = $unsigned_name;
-    	$category->type = $type;
-    	$category->save();
-    	return redirect("admin/category/add")->with("thongbao", "Thêm chuyên mục thành công");
-
+    /*trả về form thêm chuyên mục*/
+    public function getAddCategoryForm()
+    {
+        return view("admin.pages.category.add");    
     }
+    /*end*/
 
-    public function deleteCategory($id){
-    	$category = Category::find($id);
-    	$category->delete();
-    	return redirect("admin/category/list")->with("thongbao", "Xóa chuyên mục thành công");
+    /*thực hiện thêm chuyên mục*/
+    public function postAddCategory(CategoryRequest $request)
+    {
+        $postAddCategory = new CategoryService;
+        $postAddCategory->create($request->all());
+        return redirect("admin/category/add")->with("thongbao", "Thêm chuyên mục thành công");
     }
+    /*end*/
 
-    public function getEditCategory($id){
-    	$category = Category::find($id);
-    	$data = ["category"=>$category];
-    	return view("admin.pages.category.edit", $data);
+    /*thực hiện chức năng xóa chuyên mục*/
+    public function deleteCategory($id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+        return redirect("admin/category/list")->with("thongbao", "Xóa chuyên mục thành công");
     }
-    public function postEditCategory(Request $request, $id){
-    	$name 			= $request->name;
-    	$unsigned_name 	= changeTitle($request->name);
-    	$type 			= $request->type;
-    	$category 		= Category::find($id);
-    	$category->name = $name;
-    	$category->unsigned_name = $unsigned_name;
-    	$category->type = $type;
-    	$category->save();
-    	return redirect("admin/category/edit/$id")->with("thongbao", "Sửa chuyên mục thành công");
+    /*end*/
 
+    /*trả về form sửa chuyên mục*/
+    public function getEditCategory($id)
+    {
+        $category = Category::find($id);
+        $data = ["category" => $category];
+        return view("admin.pages.category.edit", $data);
     }
+    /*end*/
 
-    
+    /*chức năng thêm sửa chuyên mục*/
+    public function postEditCategory(CategoryRequest $request, $id)
+    {
+        $editCategory = new CategoryService;
+        $editCategory->edit($id, $request->all());
+        return redirect("admin/category/edit/$id")->with("thongbao", "Sửa chuyên mục thành công");
+    }
+    /*end*/
 }

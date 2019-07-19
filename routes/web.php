@@ -17,19 +17,18 @@ Route::get('/', function () {
 // Route::get('login', function(){
 // 	return view("client.pages.login");
 // });
-Route::get("login", "ClientController@getLogin");
-Route::post("login", "ClientController@postLogin");
-Route::get("signup", "ClientController@getSignup");
-Route::post("signup", "ClientController@postSignup");
+Route::get("login", "UserController@getLogin");
+Route::post("login", "UserController@postLogin");
+Route::get("signup", "UserController@getSignup");
+Route::post("signup", "UserController@postSignup");
 
 
 Route::group(["prefix"=>"admin"], function(){
 	Route::group(["prefix"=>"category"], function(){
-		Route::get("add", "CategoryController@getAddCategory");
+		Route::get("add", "CategoryController@getAddCategoryForm");
 		Route::post("add", "CategoryController@postAddCategory");
-		Route::get("list", "CategoryController@getListCategory");
+		Route::get("list", "CategoryController@getListCategoryForm");
 		Route::get("delete/{id}", "CategoryController@deleteCategory");
-
 		Route::get("edit/{id}", "CategoryController@getEditCategory");
 		Route::post("edit/{id}", "CategoryController@postEditCategory");
 	});
@@ -46,7 +45,8 @@ Route::group(["prefix"=>"admin"], function(){
 
 	Route::group(["prefix"=>"document"], function(){
 		Route::get("add", "DocumentController@getAddDocument");
-		Route::get("list", "DocumentController@getListDocument");
 		Route::post("add", "DocumentController@postAddDocument");
+		Route::get("list", "DocumentController@getListDocument");
+		
 	});
 });

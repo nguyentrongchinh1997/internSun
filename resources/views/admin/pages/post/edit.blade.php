@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label>Chuyên mục</label>
                         <select class="form-control" name="category">
-                            @foreach($list_category as $l)
+                            @foreach($listCategory as $l)
                                 <option @if($l->id == $post->id_category){{"selected"}}@endif value="{{$l->id}}">{{$l->name}}</option>
                             @endforeach
                         <select >
@@ -34,14 +34,15 @@
                     </div>
                     <div class="form-group">
                         <label>Ảnh post </label>
-                        <input type="file" class="form-group" name="file">
+                        <input type="file" name="file" >
+                        <!-- <input type="file" class="form-group" name="test"> -->
                     </div>
                     <div class="form-group">
                         <label>Nội dung</label>
                         <textarea name="content" id="demo" class="ckeditor">{!!$post->content!!}</textarea>
                     </div>
                     <div class="form-group">
-                        <button>Sửa</button>
+                        <button type="submit">Sửa</button>
                     </div>
                 </form>
                 
