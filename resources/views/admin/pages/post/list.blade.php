@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                     @php $stt = 0; @endphp
-                    @foreach($list_post as $l)
+                    @foreach($listPost as $l)
                         <tr>
                             <td>{{++$stt}}</td>
                             <td>
