@@ -28,7 +28,7 @@
 		<div class="col-lg-7">
 			<input type="text" placeholder="Tìm kiếm tại đây ..." name="">
 		</div>
-		<div class="col-lg-3">
+		<div class="col-lg-3" style="text-align: right;">
 			<a href="login">Đăng nhập</a> <span style="color: #fff">|</span> <a href="signup">Đăng ký</a>
 		</div>
 		

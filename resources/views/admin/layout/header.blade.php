@@ -17,8 +17,8 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        @if(session()->get('email') != NULL)
-                            <li><i class="fa fa-user fa-fw"></i>{{session()->get('email')}}
+                        @if(Auth::check())
+                            <li><i class="fa fa-user fa-fw"></i>{{Auth::user()->email}}
                             </li>
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
