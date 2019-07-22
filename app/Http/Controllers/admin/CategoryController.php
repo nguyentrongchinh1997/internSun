@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests\CategoryRequest;
@@ -11,24 +12,27 @@ class CategoryController extends Controller
 {
     /*hàm khởi tạo*/
     protected $listCategory;
-    public function __construct(Category $category)
+    public function __construct(CategoryService $category)
     {
         $this->listCategory = $category;
+        
     }
     /*end*/
 
     /*trả về danh sách chuyên mục*/
     public function getListCategoryForm()
     {
-        $data = ["listCategory"=>$this->listCategory->listAllCategory()];
+        $data = ["listCategory" => $this->listCategory->listAllCategory()];
         return view("admin.pages.category.list", $data);
+
     }
     /*end*/
 
     /*trả về form thêm chuyên mục*/
     public function getAddCategoryForm()
     {
-        return view("admin.pages.category.add");    
+        return view("admin.pages.category.add");
+
     }
     /*end*/
 
@@ -38,6 +42,7 @@ class CategoryController extends Controller
         $postAddCategory = new CategoryService;
         $postAddCategory->create($request->all());
         return redirect("admin/category/add")->with("thongbao", "Thêm chuyên mục thành công");
+
     }
     /*end*/
 
@@ -47,6 +52,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->delete();
         return redirect("admin/category/list")->with("thongbao", "Xóa chuyên mục thành công");
+
     }
     /*end*/
 
@@ -56,6 +62,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $data = ["category" => $category];
         return view("admin.pages.category.edit", $data);
+
     }
     /*end*/
 
@@ -65,6 +72,7 @@ class CategoryController extends Controller
         $editCategory = new CategoryService;
         $editCategory->edit($id, $request->all());
         return redirect("admin/category/edit/$id")->with("thongbao", "Sửa chuyên mục thành công");
+
     }
     /*end*/
 }

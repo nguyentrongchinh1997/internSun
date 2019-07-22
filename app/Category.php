@@ -10,7 +10,9 @@ class Category extends Model
     public $timestamps = false;
     protected $table = "tbl_category";
     protected $fillable = [
-        'name', 'unsigned_name', 'type'
+        'name', 
+        'unsigned_name', 
+        'type'
     ];
 
     public function post()

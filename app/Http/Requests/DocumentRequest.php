@@ -27,8 +27,7 @@ class DocumentRequest extends FormRequest
         return [
             "name" => "required",
             "dicription" => "required",
-            "url_document" => "required",
-            //
+            
         ];
     }
 }

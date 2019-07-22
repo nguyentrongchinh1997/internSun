@@ -25,22 +25,22 @@
                     </tr>
                 </thead>
                 @php $stt = 0; @endphp
-                @foreach($listCategory as $l)
+                @foreach($listCategory as $category)
                     <tr>
                         <td>{{++$stt}}</td>
                         <td>
-                            <a href="admin/category/edit/{{$l->id}}">
-                                {{$l->name}}
+                            <a href="admin/category/edit/{{$category->id}}">
+                                {{$category->name}}
                             </a>
                             
                         </td>
                         <td>
-                            {{$l->unsigned_name}}
+                            {{$category->unsigned_name}}
                         </td>
                         <td>
-                            @if($l->type == 1)
+                            @if($category->type == 1)
                                 <span>Tài liệu tải</span>
-                            @elseif($l->type==2)
+                            @elseif($category->type==2)
                                 <span>Thi thử</span>
                             @else
                                 <span>Bài viết</span>
@@ -49,7 +49,7 @@
                        
                         <td>
                             <center>
-                                <a onclick="return xoa()" href="admin/category/delete/{{$l->id}}">Xóa</a>
+                                <a onclick="return xoa()" href="admin/category/delete/{{$category->id}}">Xóa</a>
                             </center>
                             
                         </td>

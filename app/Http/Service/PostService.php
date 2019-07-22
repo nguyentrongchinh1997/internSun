@@ -3,6 +3,7 @@
 namespace App\Http\Service;
 
 use App\Post;
+use App\Category;
 
 class PostService
 {
@@ -51,5 +52,12 @@ class PostService
             $image->move("upload/post", $name);
             return $name;
         }
+    }
+
+    public function listCategory()
+    {
+        $listCategory = Category::where("type", 0)->get();
+        return $listCategory;
+        
     }
 }

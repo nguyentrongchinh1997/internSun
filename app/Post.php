@@ -10,7 +10,13 @@ class Post extends Model
     public $timestamps = false;
     protected $table = "tbl_post";
     protected $fillable = [
-        'title', 'unsigned_title', 'content', 'image', 'view', 'date', 'id_category'
+        'title', 
+        'unsigned_title', 
+        'content', 
+        'image', 
+        'view', 
+        'date', 
+        'id_category'
     ];
 
 
