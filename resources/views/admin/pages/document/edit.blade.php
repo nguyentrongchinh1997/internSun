@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Tài liệu
-                    <small>Thêm</small>
+                    <small>Sửa</small>
                 </h1>
             </div>
             <div class="col-lg-7">
@@ -21,53 +21,64 @@
                         {{session('thongbao')}}
                     </div>
                 @endif
-                <form method="post" action="admin/document/add" enctype="multipart/form-data">
+                <form method="post" action="admin/document/edit/{{$olderDocument->id}}" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label>Tên tài liệu</label>
-                        <input class="form-control" type="text" name="name">
+                        <input value="{{$olderDocument->name}}" class="form-control" type="text" name="name">
                     </div>
                     <div class="form-group">
                         <label>Loại tài liệu</label>
                         <select class="form-control" id="type" name="type">
-                            <option value="0">Miễn phí</option>
-                            <option value="1">Trả phí</option>
+                            <option @if ($olderDocument->type == 0) {{"selected"}} @endif value="0">Miễn phí</option>
+                            <option @if ($olderDocument->type == 1) {{"selected"}} @endif value="1">Trả phí</option>
                         <select >
                     </div>
                     <div class="form-group">
                         <label>Giá tài liệu</label>
-                        <input id="price" type="number" class="form-control" name="price">
+                        <input value="{{$olderDocument->price}}" id="price" type="number" class="form-control" name="price">
                     </div>
                     <div class="form-group">
-                        <label>Ảnh đại diện</label>
+                        <label>Ảnh đại diện cũ</label><br>
+                        <img src="upload/document/{{$olderDocument->image}}" width="200px">
+                    </div>
+                    <div class="form-group">
+                        <label>Ảnh đại diện mới</label>
                         <input type="file" name="poster">
                     </div>
-                    <div>
-                        <label>Tài liệu đăng tải</label>
-                        <input type="file"  name="document">
+                    <div class="form-group">
+                        <label>Tài liệu cũ</label> <br>
+                        <button>
+                            <a href="upload/document/{{$olderDocument->url_document}}">Xem</a>
+                        </button>
+                        
                     </div>
+                    <div>
+                        <label>Tài liệu đăng tải mới</label>
+                        <input type="file"  name="document">
+                    </div><br>
                     <div class="form-group">
                         <label>Số trang muốn preview</label>
-                        <input id="preview" class="form-control" type="number" name="preview">
+                        <input {{$olderDocument->preview}} id="preview" class="form-control" type="number" name="preview">
                     </div>
                     <div class="form-group">
                         <label>Số trang</label>
-                        <input id="number_page" class="form-control" type="number" name="page">
+                        <input value="{{$olderDocument->page}}" id="number_page" class="form-control" type="number" name="page">
                     </div>
                     <div class="form-group">
                         <label>Chuyên mục</label>
                         <select class="form-control" name="id_category">
                             @foreach($category as $c)
-                                <option value="{{$c->id}}">{{$c->name}}</option>
+                                <option @if ($c->id == $olderDocument->id_category) {{"selected"}} @endif value="{{$c->id}}">{{$c->name}}</option>
                             @endforeach
                         <select >
                     </div>
                     <div class="form-group">
                         <label>Mô tả tài liệu</label>
-                        <textarea id="demo" name="dicription" class="ckeditor"></textarea>
+                        <textarea id="demo" name="dicription" class="ckeditor">{!!$olderDocument->dicription!!}</textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit">Thêm</button>
+                        <button type="submit">Sửa</button>
                     </div>
                 </form>
                 <script type="text/javascript">

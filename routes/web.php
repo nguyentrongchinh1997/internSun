@@ -14,39 +14,42 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('login', function(){
-// 	return view("client.pages.login");
-// });
-Route::get("login", "ClientController@getLogin");
-Route::post("login", "ClientController@postLogin");
-Route::get("signup", "ClientController@getSignup");
-Route::post("signup", "ClientController@postSignup");
 
+Route::get("login", "client\UserController@getLogin");
+Route::post("login", "client\UserController@postLogin");
+Route::get("signup", "client\UserController@getSignup");
+Route::post("signup", "client\UserController@postSignup");
 
-Route::group(["prefix"=>"admin"], function(){
-	Route::group(["prefix"=>"category"], function(){
-		Route::get("add", "CategoryController@getAddCategory");
-		Route::post("add", "CategoryController@postAddCategory");
-		Route::get("list", "CategoryController@getListCategory");
-		Route::get("delete/{id}", "CategoryController@deleteCategory");
+Route::get("home", "client\IndexController@getIndexPage");
 
-		Route::get("edit/{id}", "CategoryController@getEditCategory");
-		Route::post("edit/{id}", "CategoryController@postEditCategory");
+Route::group(["prefix" => "admin", "middleware" => "AdminArea"], function(){
+	Route::get("index", "admin\AdminController@getIndexPage");
+	Route::get("logout", "admin\AdminController@logout");
+	Route::group(["prefix" => "category"], function(){
+		Route::get("add", "admin\CategoryController@getAddCategoryForm");
+		Route::post("add", "admin\CategoryController@postAddCategory");
+		Route::get("list", "admin\CategoryController@getListCategoryForm");
+		Route::get("delete/{id}", "admin\CategoryController@deleteCategory");
+		Route::get("edit/{id}", "admin\CategoryController@getEditCategory");
+		Route::post("edit/{id}", "admin\CategoryController@postEditCategory");
 	});
 
 
-	Route::group(["prefix"=>"post"], function(){
-		Route::get("edit/{id}", "PostController@getEditPost");
-		Route::post("edit/{id}", "PostController@postEditPost");
-		Route::get("delete/{id}", "PostController@deletePost");
-		Route::get("list", "PostController@getListPost");
-		Route::get("add", "PostController@getAddPost");
-		Route::post("add", "PostController@postAddPost");
+	Route::group(["prefix" => "post"], function(){
+		Route::get("edit/{id}", "admin\PostController@getEditPost");
+		Route::post("edit/{id}", "admin\PostController@postEditPost");
+		Route::get("delete/{id}", "admin\PostController@deletePost");
+		Route::get("list", "admin\PostController@getListPost");
+		Route::get("add", "admin\PostController@getAddPost");
+		Route::post("add", "admin\PostController@postAddPost");
 	});
 
-	Route::group(["prefix"=>"document"], function(){
-		Route::get("add", "DocumentController@getAddDocument");
-		Route::get("list", "DocumentController@getListDocument");
-		Route::post("add", "DocumentController@postAddDocument");
+	Route::group(["prefix" => "document"], function(){
+		Route::get("edit/{id}", "admin\DocumentController@getEditDocumentForm");
+		Route::post("edit/{id}", "admin\DocumentController@postEditDocument");
+		Route::get("add", "admin\DocumentController@getAddDocument");
+		Route::post("add", "admin\DocumentController@postAddDocument");
+		Route::get("list", "admin\DocumentController@getListDocument");
+		
 	});
 });
