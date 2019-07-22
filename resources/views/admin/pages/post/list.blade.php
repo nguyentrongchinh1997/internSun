@@ -25,27 +25,27 @@
                     </tr>
                 </thead>
                     @php $stt = 0; @endphp
-                    @foreach($list_post as $l)
+                    @foreach($listPost as $post)
                         <tr>
                             <td>{{++$stt}}</td>
                             <td>
-                                <a href="admin/post/edit/{{$l->id}}">
-                                    {{$l->title}}
+                                <a href="admin/post/edit/{{$post->id}}">
+                                    {{$post->title}}
                                 </a>
                                 
                             </td>
                             <td>
-                                {{$l->unsigned_title}}
+                                {{$post->unsigned_title}}
                             </td>
                             <td>
-                                {{$l->category->name}}
+                                {{$post->category->name}}
                             </td>
                             <td>
-                                {{$l->date}}
+                                {{$post->date}}
                             </td>
                             
                             <td>
-                                <a onclick="return xoa()" href="admin/post/delete/{{$l->id}}">
+                                <a onclick="return xoa()" href="admin/post/delete/{{$post->id}}">
                                     Xóa 
                                 </a>
                             </td>

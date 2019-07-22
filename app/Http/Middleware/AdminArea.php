@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Middleware;
+
 use Illuminate\Support\Facades\Auth;
 use Closure;
 
-class ReturnLocation
+class AdminArea
 {
     /**
      * Handle an incoming request.
@@ -15,14 +16,15 @@ class ReturnLocation
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             $user = Auth::user();
-            if($user->level == 0){
-                return redirect("/");
-            }else{
-                return redirect("admin");
+            if ($user->level == 0) {
+                return redirect("login");
+            } else {
+                return $next($request);
             }
+        } else {
+            return redirect("login");
         }
-        return $next($request);
     }
 }

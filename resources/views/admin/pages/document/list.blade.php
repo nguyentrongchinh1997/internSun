@@ -27,48 +27,48 @@
                     </tr>
                 </thead>
                 @php $stt = 0; @endphp
-                @foreach($document as $l)
+                @foreach($document as $document)
                     <tr>
                         <td>{{++$stt}}</td>
                         <td>
-                            <img width="150px" src="upload/document/{{$l->image}}">
+                            <img width="150px" src="upload/document/{{$document->image}}">
                         </td>
                         <td>
-                            <a href="admin/document/edit/{{$l->id}}">
-                                {{$l->name}}
+                            <a href="admin/document/edit/{{$document->id}}">
+                                {{$document->name}}
                             </a>
                             
                         </td>
                         <td>
-                            @if($l->type == 0)
+                            @if($document->type == 0)
                                 <span>Miễn phí</span>
                             @else
                                 <span>Trả phí </span>
                             @endif
                         </td>
                         <td>
-                            @if($l->view == '')
+                            @if($document->view == '')
                                 <span>0</span>
                             @else
-                                <span>{{$l->view}}</span>
+                                <span>{{$document->view}}</span>
                             @endif
                         </td>
                         <td>
-                            @if($l->dowload == '')
+                            @if($document->dowload == '')
                                 <span>0</span>
                             @else
-                                <span>{{$l->dowload}}</span>
+                                <span>{{$document->dowload}}</span>
                             @endif
                         </td>
                         <td>
-                            @if($l->price == '')
+                            @if($document->price == '')
                                 <span>0</span>
                             @else
-                                <span>{{number_format($l->price)}}đ</span>
+                                <span>{{number_format($document->price)}}đ</span>
                             @endif
                         </td>
                         <td>
-                            {{$l->category->name}}
+                            {{$document->category->name}}
                         </td>
 
                         
