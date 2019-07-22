@@ -10,17 +10,19 @@ class DocumentService
     public function uploadFileDocument($document, $poster, $name)
     {
         if (!is_null($document) && !is_null($poster)) {
-            $document->move("upload/document", $name."-".rand());
-            $poster->move("upload/document", $name."-poster-".rand());
+            $nameDocument = $name."-".rand();
+            $namePoster = $name."-poster-".rand();
+            $document->move("upload/document", $nameDocument);
+            $poster->move("upload/document", $namePoster);
             $format = $document ->getClientOriginalExtension(); // đuôi file tài liệu
-            $result = ["format" => $format, "image" => $name."-poster-".rand(), "url_document" => $name."-".rand()];
+            $result = ["format" => $format, "image" => $namePoster, "url_document" => $nameDocument];
             return $result;
 
         }
     }
     
 
-    public function create($name, $dicription, $type, $price, $preview, $page, $id_category, $result)
+    public function create($name, $dicription, $type, $price, $preview, $page, $id_category, $result, $date)
     {
         return Document::create([
             "name" => $name,
@@ -34,6 +36,7 @@ class DocumentService
             "page" => $page,
             "format" => $result["format"],
             "id_category" => $id_category,
+            "date" => $date,
 
         ]);
 

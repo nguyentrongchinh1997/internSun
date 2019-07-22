@@ -21,6 +21,7 @@ Route::get("signup", "client\UserController@getSignup");
 Route::post("signup", "client\UserController@postSignup");
 
 Route::get("home", "client\IndexController@getIndexPage");
+Route::get("document/{tenKhongDau}/{id}.html", "client\DetailDocumentController@detailDocument");
 
 Route::group(["prefix" => "admin", "middleware" => "AdminArea"], function(){
 	Route::get("index", "admin\AdminController@getIndexPage");

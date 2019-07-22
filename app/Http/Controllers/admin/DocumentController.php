@@ -32,9 +32,10 @@ class DocumentController extends Controller
     }
 
     public function postAddDocument(DocumentRequest $request){
+        $date = date("Y-m-d H:i:s");
         $addDocument = new DocumentService();
         $result = $addDocument->uploadFileDocument($request->file("document"), $request->file("poster"), changeTitle($request->name)); // mảng kết quả trả về từ service
-        $addDocument->create($request->name, $request->dicription, $request->type, $request->price, $request->preview, $request->page, $request->id_category, $result);
+        $addDocument->create($request->name, $request->dicription, $request->type, $request->price, $request->preview, $request->page, $request->id_category, $result, $date);
         return redirect("admin/document/add")->with("thongbao", "Thêm tài liệu thành công ");
         
     }
@@ -48,6 +49,7 @@ class DocumentController extends Controller
 
     public function postEditDocument(DocumentRequest $request, $id)
     {
+
         $olderDocument = Document::find($id);
         $addDocument = new DocumentService();
         $addDocument->edit($id, $request->name, $request->dicription, $request->type, $request->price, $request->preview, $request->page, $request->id_category, $request->file("document"), $request->file("poster"));

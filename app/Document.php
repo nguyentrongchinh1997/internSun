@@ -21,7 +21,8 @@ class Document extends Model
         'view', 
         'page', 
         'format', 
-        'id_category'
+        'id_category',
+        'date'
     ];
 
 
